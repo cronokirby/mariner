@@ -1,14 +1,21 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+/// A minimal trait for the functionality a field needs to implement.
+///
+/// This trait cannot enforce the laws a field should satisfy, related to commutativity etc.
+trait Field: Eq {
+    /// The additive identity element.
+    const ZERO: Self;
+    /// The multiplicative identity element.
+    const ONE: Self;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+    /// Add two field elements, producing a third.
+    fn add(&self, other: &Self) -> Self;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+    /// Negate a field element.
+    fn negate(&self) -> Self;
+
+    /// Multiply two field elements.
+    fn mul(&self, other: &Self) -> Self;
+
+    /// Invert a field element.
+    fn invert(&self, other: &Self) -> Self;
 }
